@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Doctrine\DBAL\Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -54,9 +55,60 @@ class DashboardController extends Controller
 //        dd($tables[2]->getColumns());
 //        dd(collect($tables[2]->getColumns())->keys());
 //        dd($tables[2]->getColumns()['title']->getType()->getName());
+//        dd($this->getColumns($table)[0]);
+        $columns = $this->getColumns($table);
         $item = DB::table($table)->find($id);
         $keys = collect($item)->keys();
 //        dd($keys);
-        return view('tables/show', compact('item', 'table', 'id', 'keys'));
+        return view('tables/show', compact('item', 'table', 'id', 'keys', 'columns'));
+    }
+
+    public function edit(string $table, string $id)
+    {
+        $item = DB::table($table)->find($id);
+        $columns = $this->getColumns($table);
+        $keys = array_column($columns, 'name');
+        $types = array_column($columns, 'type');
+        return view('tables/edit', compact('item', 'table', 'id', 'keys', 'columns', 'types'));
+    }
+
+    public function update(Request $request, string $table, string $id) {
+        $new = $request->only($this->getColumnNames($table));
+        $response = DB::table($table)->where('id', $id)->update($new);
+        if ($response) {
+            return redirect('dashboard/'.$table.'/'.$id.'/edit')->with('notice', 'Successfully updated.');
+        } else {
+            return back()->with('alert', 'Update failed.');
+        }
+    }
+
+    private function getColumnNames(string $table): array
+    {
+        $columns = $this->getColumns($table);
+        return array_column($columns, 'name');
+    }
+
+    private function getColumns(string $table): array
+    {
+        $tables = DB::getDoctrineSchemaManager()->listTables();
+        $keys = [];
+
+        foreach ($tables as $t) {
+            if ($t->getName() == $table) {
+                $keys = collect($t->getColumns())->keys();
+            }
+        }
+
+        $columns = []; // id, name, type
+        foreach ($keys as $index => $key) {
+            $type = DB::connection()->getDoctrineColumn($table, $key)->getType()->getName();
+            $item['id'] = $index + 1;
+            $item['name'] = $key;
+            $item['type'] = $type;
+
+            array_push($columns, (object)$item);
+        }
+
+        return $columns;
     }
 }

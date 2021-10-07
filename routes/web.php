@@ -24,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/{table}', [DashboardController::class, 'index']);
     Route::get('/dashboard/{table}/{id}', [DashboardController::class, 'show']);
     Route::get('/dashboard/{table}/{id}/edit', [DashboardController::class, 'edit']);
+    Route::put('/dashboard/{table}/{id}/update', [DashboardController::class, 'update']);
+    Route::get('/dashboard/{table}/{id}/delete', [DashboardController::class, 'delete']);
+    Route::delete('/dashboard/{table}/{id}/destroy', [DashboardController::class, 'destroy']);
 });
 
 
