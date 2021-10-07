@@ -82,6 +82,20 @@ class DashboardController extends Controller
         }
     }
 
+    public function delete(string $table, string $id) {
+        $item = DB::table($table)->find($id);
+        return view('tables/delete', compact('item', 'table', 'id'));
+    }
+
+    public function destroy(string $table, string $id) {
+        $response = DB::table($table)->delete($id);
+        if ($response) {
+            return redirect('dashboard/'.$table)->with('notice', 'Successfully deleted.');
+        } else {
+            return back()->with('alert', 'Delete failed.');
+        }
+    }
+
     private function getColumnNames(string $table): array
     {
         $columns = $this->getColumns($table);
