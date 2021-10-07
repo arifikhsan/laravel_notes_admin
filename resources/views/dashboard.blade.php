@@ -24,6 +24,10 @@
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Table Count
                                             </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Action
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
@@ -39,10 +43,12 @@
                                                         {{ $item['count'] }}
                                                     </div>
                                                 </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                                    <a href="/dashboard/{{ $item['name'] }}"
+                                                       class="text-green-600 hover:text-green-900">Show</a>
+                                                </td>
                                             </tr>
                                         @endforeach
-
-                                        <!-- More people... -->
                                         </tbody>
                                     </table>
                                 </div>

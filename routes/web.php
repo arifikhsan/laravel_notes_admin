@@ -18,7 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
-Route::get('/dashboard/{table}', [DashboardController::class, 'table'])->middleware(['auth']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/dashboard/{table}', [DashboardController::class, 'index']);
+    Route::get('/dashboard/{table}/{id}', [DashboardController::class, 'show']);
+    Route::get('/dashboard/{table}/{id}/edit', [DashboardController::class, 'edit']);
+});
+
 
 require __DIR__.'/auth.php';
