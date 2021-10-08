@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/dashboard/{table}', [DashboardController::class, 'index']);
+    Route::get('/dashboard/{table}/new', [DashboardController::class, 'new']);
+    Route::post('/dashboard/{table}/create', [DashboardController::class, 'create']);
     Route::get('/dashboard/{table}/{id}', [DashboardController::class, 'show']);
     Route::get('/dashboard/{table}/{id}/edit', [DashboardController::class, 'edit']);
     Route::put('/dashboard/{table}/{id}/update', [DashboardController::class, 'update']);

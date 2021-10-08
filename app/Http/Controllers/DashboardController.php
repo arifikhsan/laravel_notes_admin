@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Doctrine\DBAL\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -43,23 +44,34 @@ class DashboardController extends Controller
         return view('tables/index', compact('keys', 'columnsAndTypes', 'table', 'items'));
     }
 
+    public function new(string $table)
+    {
+        $columns = $this->getColumns($table);
+        return view('tables/new', compact('table', 'columns'));
+    }
+
+    public function create(Request $request, string $table)
+    {
+        $new = (object)$request->only($this->getColumnNames($table));
+        if ($request->has('created_at')) {
+            $new->created_at = Carbon::now();
+        }
+        if ($request->has('updated_at')) {
+            $new->updated_at = Carbon::now();
+        }
+        $id = DB::table($table)->insertGetId((array)$new);
+        if ($id > 0) {
+            return redirect('dashboard/' . $table . '/' . $id)->with('notice', 'Successfully added.');;
+        } else {
+            return back()->with('alert', 'Add failed.');
+        }
+    }
+
     public function show(string $table, string $id)
     {
-//        $schema = DB::getDoctrineSchemaManager();
-//        $tables = $schema->listTables();
-
-//        dd($schema);
-//        dd(Schema::getColumnListing($table)); // sort by alphabet
-//        dd($tables);
-//        dd($tables[2]->getName());
-//        dd($tables[2]->getColumns());
-//        dd(collect($tables[2]->getColumns())->keys());
-//        dd($tables[2]->getColumns()['title']->getType()->getName());
-//        dd($this->getColumns($table)[0]);
         $columns = $this->getColumns($table);
         $item = DB::table($table)->find($id);
         $keys = collect($item)->keys();
-//        dd($keys);
         return view('tables/show', compact('item', 'table', 'id', 'keys', 'columns'));
     }
 
@@ -72,25 +84,28 @@ class DashboardController extends Controller
         return view('tables/edit', compact('item', 'table', 'id', 'keys', 'columns', 'types'));
     }
 
-    public function update(Request $request, string $table, string $id) {
+    public function update(Request $request, string $table, string $id)
+    {
         $new = $request->only($this->getColumnNames($table));
         $response = DB::table($table)->where('id', $id)->update($new);
         if ($response) {
-            return redirect('dashboard/'.$table.'/'.$id.'/edit')->with('notice', 'Successfully updated.');
+            return redirect('dashboard/' . $table . '/' . $id . '/edit')->with('notice', 'Successfully updated.');
         } else {
             return back()->with('alert', 'Update failed.');
         }
     }
 
-    public function delete(string $table, string $id) {
+    public function delete(string $table, string $id)
+    {
         $item = DB::table($table)->find($id);
         return view('tables/delete', compact('item', 'table', 'id'));
     }
 
-    public function destroy(string $table, string $id) {
+    public function destroy(string $table, string $id)
+    {
         $response = DB::table($table)->delete($id);
         if ($response) {
-            return redirect('dashboard/'.$table)->with('notice', 'Successfully deleted.');
+            return redirect('dashboard/' . $table)->with('notice', 'Successfully deleted.');
         } else {
             return back()->with('alert', 'Delete failed.');
         }
