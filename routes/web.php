@@ -19,16 +19,16 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/secretroom', [DashboardController::class, 'overview'])->name('secretroom-overview');
 
-    Route::get('/dashboard/{table}', [DashboardController::class, 'index']);
-    Route::get('/dashboard/{table}/new', [DashboardController::class, 'new']);
-    Route::post('/dashboard/{table}/create', [DashboardController::class, 'create']);
-    Route::get('/dashboard/{table}/{id}', [DashboardController::class, 'show']);
-    Route::get('/dashboard/{table}/{id}/edit', [DashboardController::class, 'edit']);
-    Route::put('/dashboard/{table}/{id}/update', [DashboardController::class, 'update']);
-    Route::get('/dashboard/{table}/{id}/delete', [DashboardController::class, 'delete']);
-    Route::delete('/dashboard/{table}/{id}/destroy', [DashboardController::class, 'destroy']);
+    Route::get('/secretroom/{table}', [DashboardController::class, 'index']);
+    Route::get('/secretroom/{table}/new', [DashboardController::class, 'new']);
+    Route::post('/secretroom/{table}/create', [DashboardController::class, 'create']);
+    Route::get('/secretroom/{table}/{id}', [DashboardController::class, 'show']);
+    Route::get('/secretroom/{table}/{id}/edit', [DashboardController::class, 'edit']);
+    Route::put('/secretroom/{table}/{id}/update', [DashboardController::class, 'update']);
+    Route::get('/secretroom/{table}/{id}/delete', [DashboardController::class, 'delete']);
+    Route::delete('/secretroom/{table}/{id}/destroy', [DashboardController::class, 'destroy']);
 });
 
 

@@ -43,7 +43,7 @@
                         </div>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                        <a href="/dashboard/{{ $item['name'] }}"
+                        <a href="/secretroom/{{ $item['name'] }}"
                            class="text-green-600 hover:text-green-900">Show</a>
                       </td>
                     </tr>

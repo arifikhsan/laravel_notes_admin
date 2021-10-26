@@ -12,7 +12,7 @@ class DashboardController extends Controller
     /**
      * @throws Exception
      */
-    public function dashboard()
+    public function overview()
     {
         $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
         $items = [];
@@ -21,7 +21,7 @@ class DashboardController extends Controller
             $item['count'] = DB::table($table)->count();
             array_push($items, $item);
         }
-        return view('dashboard', compact('items'));
+        return view('secretroom', compact('items'));
     }
 
     public function index(string $table)
@@ -61,7 +61,7 @@ class DashboardController extends Controller
         }
         $id = DB::table($table)->insertGetId((array)$new);
         if ($id > 0) {
-            return redirect('dashboard/' . $table . '/' . $id)->with('notice', 'Successfully added.');;
+            return redirect('dashboard/' . $table . '/' . $id)->with('notice', 'Successfully added.');
         } else {
             return back()->with('alert', 'Add failed.');
         }
