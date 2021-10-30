@@ -37,7 +37,7 @@
   @endif
 
   <div class="max-w-7xl mx-auto mt-3 sm:px-6 lg:px-8 py-3">
-    <a href="/dashboard/{{ $table }}/new" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 activate:bg-indigo-900 focus:ring focus:border-indigo-900 ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+    <a href="/secretroom/{{ $table }}/new" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 activate:bg-indigo-900 focus:ring focus:border-indigo-900 ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
       {{ __('Add New') }}
     </a>
   </div>
@@ -93,15 +93,15 @@
                       @endforeach
 
                       <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                        <a href="/dashboard/{{ $table }}/{{ $item->id }}">
+                        <a href="/secretroom/{{ $table }}/{{ $item->id }}">
                           <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Show</span>
                         </a>
-                        <a href="/dashboard/{{ $table }}/{{ $item->id }}/edit">
+                        <a href="/secretroom/{{ $table }}/{{ $item->id }}/edit">
                           <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800">Edit</span>
                         </a>
-                        <a href="/dashboard/{{ $table }}/{{ $item->id }}/delete">
+                        <a href="/secretroom/{{ $table }}/{{ $item->id }}/delete">
                           <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Delete</span>
                         </a>

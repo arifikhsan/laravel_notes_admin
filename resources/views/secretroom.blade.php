@@ -34,7 +34,7 @@
                     <tr class="even:bg-gray-50">
                       <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
-                          <a href="/dashboard/{{ $item['name'] }}">{{ $item['name'] }}</a>
+                          <a href="/secretroom/{{ $item['name'] }}">{{ $item['name'] }}</a>
                         </div>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap">

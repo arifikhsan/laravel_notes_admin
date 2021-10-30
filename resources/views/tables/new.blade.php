@@ -55,7 +55,7 @@
             <div class="sm:mt-0">
               <div class="">
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                  <form action="/dashboard/{{ $table }}/create" method="POST">
+                  <form action="/secretroom/{{ $table }}/create" method="POST">
                     @csrf
 
                     <div class="shadow overflow-hidden sm:rounded-md">

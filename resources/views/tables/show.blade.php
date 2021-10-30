@@ -19,9 +19,9 @@
               </p>
             </div>
             <div class="flex items-center space-x-2 px-4 py-5 sm:px-">
-              <a href="/dashboard/{{ $table }}/{{ $item->id }}/edit"
+              <a href="/secretroom/{{ $table }}/{{ $item->id }}/edit"
                  class="text-indigo-600 hover:text-indigo-900">Edit</a>
-              <a href="/dashboard/{{ $table }}/{{ $item->id }}/delete"
+              <a href="/secretroom/{{ $table }}/{{ $item->id }}/delete"
                  class="ml-2 text-red-600 hover:text-red-900">Delete</a>
             </div>
           </div>

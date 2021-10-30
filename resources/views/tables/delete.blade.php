@@ -19,15 +19,15 @@
               </p>
             </div>
             <div class="flex items-center space-x-2 px-4 py-5 sm:px-">
-              <a href="/dashboard/{{ $table }}/{{ $item->id }}/edit"
+              <a href="/secretroom/{{ $table }}/{{ $item->id }}/edit"
                  class="text-indigo-600 hover:text-indigo-900">Edit</a>
-              <a href="/dashboard/{{ $table }}/{{ $item->id }}/show"
+              <a href="/secretroom/{{ $table }}/{{ $item->id }}/show"
                  class="ml-2 text-blue-600 hover:text-blue-900">Show</a>
             </div>
           </div>
           <div class="p-4 border-t border-gray-200">
             <p>Are you sure?</p>
-            <form action="/dashboard/{{ $table }}/{{ $item->id }}/destroy" method="POST">
+            <form action="/secretroom/{{ $table }}/{{ $item->id }}/destroy" method="POST">
               @method('DELETE')
               @csrf
 

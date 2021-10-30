@@ -61,7 +61,7 @@ class DashboardController extends Controller
         }
         $id = DB::table($table)->insertGetId((array)$new);
         if ($id > 0) {
-            return redirect('dashboard/' . $table . '/' . $id)->with('notice', 'Successfully added.');
+            return redirect('secretroom/' . $table . '/' . $id)->with('notice', 'Successfully added.');
         } else {
             return back()->with('alert', 'Add failed.');
         }
@@ -89,7 +89,7 @@ class DashboardController extends Controller
         $new = $request->only($this->getColumnNames($table));
         $response = DB::table($table)->where('id', $id)->update($new);
         if ($response) {
-            return redirect('dashboard/' . $table . '/' . $id . '/edit')->with('notice', 'Successfully updated.');
+            return redirect('secretroom/' . $table . '/' . $id . '/edit')->with('notice', 'Successfully updated.');
         } else {
             return back()->with('alert', 'Update failed.');
         }
@@ -105,7 +105,7 @@ class DashboardController extends Controller
     {
         $response = DB::table($table)->delete($id);
         if ($response) {
-            return redirect('dashboard/' . $table)->with('notice', 'Successfully deleted.');
+            return redirect('secretroom/' . $table)->with('notice', 'Successfully deleted.');
         } else {
             return back()->with('alert', 'Delete failed.');
         }
