@@ -37,7 +37,8 @@
   @endif
 
   <div class="max-w-7xl px-4 mx-auto mt-3 sm:px-6 lg:px-8 py-3">
-    <a href="/secretroom/{{ $table }}/new" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 activate:bg-indigo-900 focus:ring focus:border-indigo-900 ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
+    <a href="/secretroom/{{ $table }}/new"
+       class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 activate:bg-indigo-900 focus:ring focus:border-indigo-900 ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
       {{ __('Add New') }}
     </a>
   </div>
@@ -68,6 +69,7 @@
                   </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
+
                   @foreach ($items as $item)
                     <tr class="even:bg-gray-50">
                       @foreach($keys as $key)
