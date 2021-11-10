@@ -6,9 +6,21 @@ use Doctrine\DBAL\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
+        View::share('tables', $tables);
+    }
+
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
+
     /**
      * @throws Exception
      */

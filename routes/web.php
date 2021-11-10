@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/secretroom', [DashboardController::class, 'overview'])->name('secretroom-overview');
 
     Route::get('/secretroom/{table}', [DashboardController::class, 'index']);
